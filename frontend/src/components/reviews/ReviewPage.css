@@ -1,0 +1,110 @@
+.review-page {
+    margin: 20px auto;
+    margin-top: 100px;
+    width: 80%;
+}
+
+.review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.review-card {
+    background-color: #f7e8bd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-card h3 {
+    margin-top: 0;
+}
+
+.review-card p {
+    margin-bottom: 0;
+}
+
+/* Add these styles to your ReviewPage.css */
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content input[type="radio"] {
+    margin-right: 5px;
+}
+
+.modal-content button[type="submit"] {
+    background-color: #508e4a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.star-rating {
+    margin-bottom: 10px;
+}
+
+.star {
+    margin-right: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}

@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.footer-column ul {
+    /* background-color: aquamarine; */
+    list-style: none;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 100px;
+}
+
+footer .container {
+    background-color: black;
+    width: 100vmax;
+}
+
+.footer-column h4 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 22px;
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+}
+
+.footer-column h4::before {
+    content: '';
+    width: 70px;
+    height: 3px;
+    position: absolute;
+    background-color: violet;
+    bottom: -10px;
+}
+
+.footer-column ul li {
+    padding: 5px 0;
+}
+
+.footer-column ul li a {
+    color: white;
+    opacity: 0.5;
+    font-size: 16px;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    opacity: 1;
+}
+
+.footer-column input {
+    border: none;
+    width: 250px;
+    height: 45px;
+    display: block;
+    padding-left: 20px;
+    margin: 14px 0;
+}
+
+.footer-column .inputSubmit{
+ padding: 0 20px;
+ background-color: violet;
+ border: none;
+ color: white;
+}
+
+.col p{
+    color: white;
+
+}
+
+hr{
+    opacity: 0.7;
+}
+
+.socialIcons i{
+    display: inline-block;
+    color: white;
+    font-size: 30px;
+    margin: 0 10px;
+    transition: 0.5s;
+}
+
+.socialIcons i:hover{
+    color: violet;
+}
+
+@media(max-width:600px){
+    footer .row{
+        flex-direction: row;
+        padding: 20px 30px;
+    }
+
+    .footer .footer-column ul{
+        margin-left: 20px;
+        margin-bottom: 20px;
+
+    }
+
+    .footer-column input{
+        width: 100%;
+    }
+}

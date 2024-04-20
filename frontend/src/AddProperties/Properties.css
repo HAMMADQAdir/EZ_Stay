@@ -1,0 +1,185 @@
+/* App.css */
+
+/* Body styles */
+.App{
+  margin-top: 50px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f7fc;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: #005e7a;
+    color: #ffffff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  .navbar-links li:last-child {
+    margin-right: 0;
+  }
+  
+  .navbar-links a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .navbar-auth button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* Container styles */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Heading styles */
+  h2 {
+    margin-top: 20px;
+    color: #005e7a;
+  }
+  
+  /* Form styles */
+  form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select {
+    width: 100%; /* Make the dropdown full width */
+    padding: 10px; /* Add padding to match other form elements */
+    margin-bottom: 10px; /* Add margin to match other form elements */
+    border: 1px solid #cccccc; /* Add border to match other form elements */
+    border-radius: 4px; /* Add border-radius to match other form elements */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+  }
+  textarea {
+    margin-bottom: 10px;
+    width: 100%; /* Make the dropdown full width */
+    padding: 10px; /* Add padding to match other form elements */
+    margin-bottom: 10px; /* Add margin to match other form elements */
+    border: 1px solid #cccccc; /* Add border to match other form elements */
+    border-radius: 4px; /* Add border-radius to match other form elements */
+    box-sizing: border-box;
+  }
+  
+  input[type="file"] {
+    margin-bottom: 10px;
+    width: 100%; /* Make the dropdown full width */
+    padding: 10px; /* Add padding to match other form elements */
+    margin-bottom: 10px; /* Add margin to match other form elements */
+    border: 1px solid #cccccc; /* Add border to match other form elements */
+    border-radius: 4px; /* Add border-radius to match other form elements */
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #005e7a;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  
+    }
+  button:hover {
+    background-color: #004b5c;
+  }
+  
+  /* Property list styles */
+  .property-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .property-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .property-image {
+    height: 200px; /* Fixed height */
+    width: 100%; /* Fixed width of 50% of its container */
+    background-size: cover;
+    background-position: center center; /* Center the background image */
+    border: 1px solid #000000; /* Add outline */
+    border-radius: 8px; /* Apply border-radius if needed */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px; /* Add margin if needed */
+  }
+  
+  
+  .property-details {
+    padding: 10px;
+  }
+  
+  .property-actions {
+    display: flex;
+    justify-content:center; /* Change to flex-start to align buttons to the start */
+    margin: 5px;
+  
+  }
+  
+  .property-actions button {
+    background-color: #005e7a;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .property-actions button:hover {
+    background-color: #004b5c;
+  }
+  
+  
