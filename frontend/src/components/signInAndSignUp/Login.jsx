@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { auth } from "./firebaseConfig";
+import { auth } from "../firebaseConfig/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Forget, { handleForgotPassword } from "./forget";
 
@@ -23,9 +23,10 @@ export default function Login() {
       );
       const user = userCredential.user;
       console.log("User created:", user);
-
+    
+      const userid = user.uid
       // Redirect to home page after successful registration
-      navigate("/");
+      navigate("/", { state: { userid} })
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -103,3 +104,4 @@ export default function Login() {
     </>
   );
 }
+

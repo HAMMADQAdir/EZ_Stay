@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-
+import ezstay from './ezstay.jpg'
 // import {ezstayLogo} from "./logos/ezstay.jpeg"; // Import the image
 export default function Header() {
   return (
@@ -22,6 +22,9 @@ export default function Header() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+            <img src={ezstay} alt="EzStay Logo" style={{ height: "50px", width: "auto", marginRight: "10px" ,objectFit:'cover'}} />
+              </li>
               <li className="nav-item">
                 <NavLink
                   className="nav-link "

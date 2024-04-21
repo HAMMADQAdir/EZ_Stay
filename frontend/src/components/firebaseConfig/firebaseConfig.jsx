@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage , ref, uploadBytes} from 'firebase/storage'
+
 const firebaseConfig = {
     apiKey: "AIzaSyB7bhMMlbv15vgEmOpqS8G1oJYbLqHKgPg",
     authDomain: "ezstay-8303f.firebaseapp.com",
@@ -10,4 +12,6 @@ const firebaseConfig = {
     measurementId: "G-SYNHSV2WSC"
   };
   const app = initializeApp(firebaseConfig);
-  export  const auth = getAuth(app);
+  const storage = getStorage(app);
+  const auth = getAuth(app);
+  export {auth,storage}

@@ -5,12 +5,13 @@ import styled, { keyframes } from 'styled-components';
 // import pic3 from "./pic3.jpg";
 // import pic4 from "./pic 4.jpg";
 
+
 const properties = [
     {
         name: 'Cozy Apartment',
         description: 'A lovely apartment in the heart of the city.',
         rent: 1500,
-        image: ""
+        image: "pic1"
     },
     {
         name: 'Spacious House',

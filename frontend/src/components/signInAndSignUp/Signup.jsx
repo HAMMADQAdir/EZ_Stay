@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "./firebaseConfig";
+import { auth } from "../firebaseConfig/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,6 +11,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    userId:"",
     FirstName: "",
     LastName: "",
     STREETNO: 0,
@@ -31,6 +32,7 @@ export default function Signup() {
         password
       );
       const user = userCredential.user;
+      formData.userId = user.uid;
       console.log("User created:", user);
       await RegisteringInMySql(formData);
       navigate("/");
@@ -41,6 +43,7 @@ export default function Signup() {
     } finally {
       setLoading(false);
     }
+    navigate("/");
   };
 
   return (
@@ -168,6 +171,7 @@ const RegisteringInMySql = async (formData) => {
   try {
     const response = await axios.post("/register", formData);
     console.log(response.data);
+    
   } catch (error) {
     console.error("Error registering user:", error);
   }

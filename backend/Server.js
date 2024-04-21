@@ -1,8 +1,10 @@
 import mysql from "mysql";
 import express from "express";
-import cors from'cors'
+import cors from "cors";
+import multer from "multer";
+
 const server = express();
-server.use(cors())
+server.use(cors());
 server.use(express.json());
 
 var db = mysql.createConnection({
@@ -36,7 +38,7 @@ server.get("/", (req, res) => {
 // })
 // getting items
 server.get("/getItem", (req, res) => {
-  db.query("SELECT * FROM item", (err, result) => {
+  db.query("SELECT * FROM item where itemId>19", (err, result) => {
     if (err) throw err;
     else {
       res.send(result);
@@ -45,103 +47,66 @@ server.get("/getItem", (req, res) => {
 });
 // registering user in my sql
 server.post("/register", (req, res) => {
-
-  const { FirstName, LastName, STREETNO, Locality, Pincode } = req.body;
- 
+  const { userId, FirstName, LastName, STREETNO, Locality, Pincode } = req.body;
+  console.log(req.body);
   const query =
-    "INSERT INTO user (FirstName, LastName, STREETNO, Locality, Pincode) VALUES (?,?,?,?,?)";
-  db.query(query, [FirstName, LastName, STREETNO, Locality, Pincode], (err, result) => {
-    if (err) {
-      console.error("Error inserting data:", err);
-      res.status(500).send("Error inserting data");
-    } else {
-      console.log("Data added successfully");
-      res.status(200).send("Data added successfully");
-      res.render('/home');
+    "INSERT INTO user (userId,FirstName, LastName, STREETNO, Locality, Pincode) VALUES (?,?,?,?,?,?)";
+  db.query(
+    query,
+    [userId, FirstName, LastName, STREETNO, Locality, Pincode],
+    (err, result) => {
+      if (err) {
+        console.error("Error inserting data:", err);
+        res.status(500).send("Error inserting data");
+      } else {
+        console.log("Data added successfully");
+        res.status(200).send("Data added successfully");
+      }
     }
-  });
-
-
-
+  );
 });
 
 // inserting propeerties details in mysql
 
-
-server.post("/prpty", (req, res) => {
-  const { Pincode, Locality, Street, state,category } = req.body;
+server.post("/properties", (req, res) => {
+  const { itemId, Pincode, Locality, Street, state, userId } = req.body;
+  const query = `INSERT INTO item (itemId, Pincode, Locality, Street, state, userId) VALUES (?, ?, ?, ?, ?, ?)`;
   
-  let query;
-  let params;
-  query =
-  "INSERT INTO item (Pincode, Locality, Street, state) VALUES (?,?,?,?)";
-params = [
-  Pincode, Locality, Street, state
-];
-console.log("get")
-db.query(query, params, (err, result) => {
-  if (err) {
-    console.error("Error inserting data:", err);
-    res.status(500).send("Error inserting data");
-  } else {
-    console.log("Data added successfully");
-    res.status(200).send("Data addeddddd successfully");
-    res.redirect('/home'); // Use res.redirect instead of res.render
-  }
-});
-  if (category === "PG") {
-    const { pg_timing, emminities, pg_mess, mess_timing } = req.body;
-    query =
-      "INSERT INTO pg_table (Pincode, Locality, Street, state, pg_timing, emminities, pg_mess, mess_timing) VALUES (?,?,?,?,?,?,?,?)";
-    params = [
-      Pincode, Locality, Street, state,
-      pg_timing,
-      emminities,
-      pg_mess,
-      mess_timing,
-    ];
-  } else if (category === "Flat") {
-    const { size, floors, Ftype } = req.body;
-    query =
-      "INSERT INTO flat_table (FirstName, LastName, STREETNO, Locality, Pincode, size, floors, Ftype) VALUES (?,?,?,?,?,?,?,?)";
-    params = [
-      FirstName,
-      LastName,
-      STREETNO,
-      Locality,
-      Pincode,
-      size,
-      floors,
-      Ftype,
-    ];
-  } else if (category === "House") {
-    const { size, floors } = req.body;
-    query =
-      "INSERT INTO house_table (FirstName, LastName, STREETNO, Locality, Pincode, size, floors) VALUES (?,?,?,?,?,?,?)";
-    params = [
-      FirstName,
-      LastName,
-      STREETNO,
-      Locality,
-      Pincode,
-      size,
-      floors,
-    ];
-  }
-
-  db.query(query, params, (err, result) => {
+  db.query(query, [itemId, Pincode, Locality, Street, state, userId], (err, result) => {
     if (err) {
       console.error("Error inserting data:", err);
-      res.status(500).send("Error inserting data");
+      res.status(500).send("Error inserting data into database");
     } else {
-      console.log("Data added successfully");
-      res.status(200).send("Data added successfully");
-      res.redirect('/'); // Use res.redirect instead of res.render
+      console.log("Data inserted successfully");
+      res.status(200).send("Data inserted successfully");
     }
   });
 });
 
 
+server.post("/rev", (req, res) => {
+  const { rating, comment, author } = req.body; // Destructure data
+  console.log("in post");
+  db.query(
+    "INSERT INTO reviews(rating, description, author) VALUES(?, ?, ?)",
+    [rating, comment, author],
+    (err, result) => {
+      if (err) {
+        console.error("Error inserting review:", err);
+        return res.status(500).send("Error adding review");
+      }
+      console.log("Review added successfully:", result);
+      res.status(201).send("Review added successfully"); // Use 201 for created resources
+    }
+  );
+});
+
+
+server.get("/getItemCount",(req,response)=>{
+  db.query('select count(*) from user group by userId',(err,result)=>{
+    console.log(result);
+  })
+})
 // 1122
 server.listen(1122, () => {
   console.log("listen");

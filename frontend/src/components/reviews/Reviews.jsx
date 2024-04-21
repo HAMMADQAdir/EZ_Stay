@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './ReviewPage.css'; // Import CSS file for styling
 import { FaStar } from 'react-icons/fa'; // Import star icon from react-icons library
 import  axios  from 'axios';
+import { auth } from '../firebaseConfig/firebaseConfig';
 const initialReviews = [
   { id: 1, author: 'John Doe', comment: 'Great product, highly recommend!', rating: 5 },
   { id: 2, author: 'Jane Smith', comment: 'Excellent service and fast delivery.', rating: 4 },
@@ -41,6 +42,7 @@ const ReviewPage = () => {
 
   const handleSubmitReview = async (e) => {
     e.preventDefault();
+
     const author = e.target.author.value;
     const comment = e.target.comment.value;
     const newReview = {
@@ -49,10 +51,14 @@ const ReviewPage = () => {
       comment,
       rating
     };
-    setReviews([...reviews, newReview]);
-
-    setIsModalOpen(false);
-    setRating(0); // Reset rating after submission
+  
+      setReviews([...reviews, newReview]);
+      
+      await axios.post('/rev',newReview).then(result=>console.log("   s ")).catch(err=>console.log("err"))
+      setIsModalOpen(false);
+      setRating(0); // Reset rating after submission
+    
+  
   };
 
   return (

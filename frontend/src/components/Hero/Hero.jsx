@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-// import pic1 from "./pic5.png";
-// import pic2 from "./pic6.png";
-// import pic3 from "./pic7.png";
+import React, { useState, useEffect, useRef } from 'react';
+import pic1 from "./pic1.jpg";
+import pic2 from "./pic2.jpg";
+import pic3 from "./pic3.jpg";
 
 import './Hero.css'; // Import CSS file for styling
-// import logo from "./logo.jpg"; // Import logo image
+import logo from "./logo.jpg"; // Import logo image
 
 const HeroSection = () => {
-  const texts = useMemo(() => [
+  const texts = [
     'Welcome to our Rental Website!',
     'Find your perfect Rental Property here!',
     'Browse our wide range of Rental options!',
-  ], []);
-
+  ];
+  
   const images = [
-   "backiee-290909-landscape.jpg",
-   "backiee-290909-landscape.jpg",
-   "backiee-290909-landscape.jpg",
+    pic1,
+    pic2,
+    pic3,
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,6 +24,7 @@ const HeroSection = () => {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isTextFullyDisplayed, setIsTextFullyDisplayed] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(true); // Track scrolling direction
   const lastScrollY = useRef(0);
 
   const heroRef = useRef(null); // Create a reference to the hero section element
@@ -40,7 +41,7 @@ const HeroSection = () => {
     }, 5000); // Change rotation speed as needed
 
     return () => clearInterval(interval);
-  }, [texts]);
+  }, []);
 
   useEffect(() => {
     let typingTimeout;
@@ -56,16 +57,18 @@ const HeroSection = () => {
       animationTimeout = setTimeout(() => {
         setIsDeleting(true);
       }, 2000); // Delay before starting deletion
-    } else if (isDeleting && charIndex === 0) {
-      setIsDeleting(false);
-      setDisplayedText('');
-      setIsTextFullyDisplayed(false);
-      setCurrentIndex(prevIndex => (prevIndex === texts.length - 1 ? 0 : prevIndex + 1));
-    } else if (isDeleting && charIndex > 0) {
+    } else if (!isDeleting && isTextFullyDisplayed) {
+      setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000); // Delay after complete typing
+    } else if (isDeleting && charIndex >= 0) {
       typingTimeout = setTimeout(() => {
         setDisplayedText(prevText => prevText.slice(0, -1));
         setCharIndex(prevIndex => prevIndex - 1);
       }, 50); // Change deleting speed as needed
+    } else {
+      setIsDeleting(false);
+      setCharIndex(0);
     }
 
     return () => {
@@ -86,6 +89,12 @@ const HeroSection = () => {
         // Check scrolling direction
         const scrollingDown = window.scrollY > lastScrollY.current;
         lastScrollY.current = window.scrollY;
+
+        if (scrollingDown) {
+          setIsScrollingDown(true);
+        } else {
+          setIsScrollingDown(false);
+        }
 
         if (imageBottom < logoTop && scrollingDown) {
           // Add class to display logo popup animation when user scrolls past the hero image
@@ -108,7 +117,7 @@ const HeroSection = () => {
     <div className="hero-section" ref={heroRef}>
       <img src={images[currentIndex]} alt="Hero" className="hero-image" ref={imageRef} />
       <h1 className="hero-text">{displayedText}</h1>
-      {/* <img src={logo} alt="Logo" className="logo" ref={logoRef} /> */}
+      <img src={logo} alt="Logo" className="logo" ref={logoRef} />
     </div>
   );
 };

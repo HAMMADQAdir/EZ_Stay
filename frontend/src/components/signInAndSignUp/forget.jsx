@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { auth } from "./firebaseConfig";
+import { auth } from "../firebaseConfig/firebaseConfig";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader/Loader';
