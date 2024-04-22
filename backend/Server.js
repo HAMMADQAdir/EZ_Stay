@@ -102,9 +102,11 @@ server.post("/rev", (req, res) => {
 });
 
 
-server.get("/getItemCount",(req,response)=>{
-  db.query('select count(*) from user group by userId',(err,result)=>{
-    console.log(result);
+server.get("/kl",(req,response)=>{
+  db.query('select itemId ,count(itemId) from item group by itemId',(err,result)=>{
+    if (err) throw err;
+    else
+    response.status(200).json(result);
   })
 })
 // 1122

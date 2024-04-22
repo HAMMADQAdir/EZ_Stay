@@ -19,7 +19,7 @@ const nav = useNavigate();
         setCurrentUser(user);
        setCurrentUser(user.uid)
       
-       console.log(currentUser);
+      
        setLoggedIn(true);
         setLoggedIn(true);
       } else {
@@ -33,23 +33,26 @@ const nav = useNavigate();
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    async function fetchItemCount() {
-      try {
-        const response = await fetch("/getItemCount");
-        const data = await response.json();
-        setImgId(data); // Update imgId state with the fetched data\
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching item count:", error);
-      }
-    }
+  // useEffect(() => {
+  //   async function fetchItemCount() {
+  //     try {
+  //       console.log("enter in fetch0");
+  //       const response = await fetch("http://localhost:1122/getItemCount");
+  //       const data = await response.json();
+  //       setImgId(data); // Update imgId state with the fetched data\
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.error("Error fetching item count:", error);
+  //     }
+  //   }
 
-    fetchItemCount(); // Fetch item count when the component mounts
-  }, []);
+  //   fetchItemCount(); // Fetch item count when the component mounts
+  // }, []);
+  
+   
+  
 
-
-  console.log(imgId);
+  // console.log(imgId);
   const [formData, setFormData] = useState({
     itemId:0,
     userId:"",
@@ -86,15 +89,24 @@ const nav = useNavigate();
     e.preventDefault();
     setLoading(true);
     // imgId++;
+  //   fetch("/getItemCount").then(response=>response.json()
+  // ).then(data=>setImgId(data)).catch(err=>console.log(err))
+  let v = await fetch('/kl').then(response=>response.json()) ;
+  console.log(v.length);
+ 
+// axios.get('http://localhost:1122/getItemCount')
+// .then(res=>console.log(res))
+// .catch(err=>console.log("baklle balle"))
+
    setTimeout(()=>{
-    let id = parseInt(imgId);
+    setImgId(v);
     formData.userId = currentUser
-    formData.itemId = id+1;
-     axios
-      .post("http://localhost:1122/properties", formData)
+    formData.itemId = v.length+1;
+  
+      axios.post("http://localhost:1122/properties", formData)
       .then((result) => console.log("   s "))
       .catch((err) => console.log("err"));
-      console.log(formData);
+      // console.log(formData);
 
    },2000);
     const file = formData.image;
