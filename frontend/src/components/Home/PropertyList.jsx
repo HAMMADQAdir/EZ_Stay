@@ -9,8 +9,10 @@ export default function PropertyList({ property }) {
         <h2>No properties to display</h2>
       ) : (
         property.map((element, i) => (
-          <PropertyCard key={i} property={element} />
+            <PropertyCard key={i} property={element}  />
         ))
+        
+        
       )}
     </div>
   );

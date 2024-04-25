@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import { auth } from "../firebaseConfig/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import pic1 from "../Hero/pic1.jpg";
+import pic2 from "../Hero/pic2.jpg";
+import pic3 from "../Hero/pic3.jpg";
 
+// import './Hero.css'; // Import CSS file for styling
+import logo from "./logo.jpg"; // Import logo image
+
+// import pic1 from './logo.jpg'
 export default function Signup() {
+  
+
+// signup logic
+
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [loading, setLoading] = useState(false);
@@ -48,22 +59,24 @@ export default function Signup() {
 
   return (
     <>
-    <div className="backGround" style={{marginTop:'100px'}}>
-      <div className="form_container"
+   
+    <div className="background bg-red-500" style={{marginTop:'100px'}}>
+      <div className="form_container " 
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           height: "calc(100vh - 100)",
           width: "100vw",
-          flexWrap: "nowrap",
+        
           margin: "10px",
-          flexDirection: "column", 
+          flexDirection: "column"
+          
         }}
       >
-        <form onSubmit={register} style={{width:"40%"}}>
+        <form onSubmit={register} style={{width:"40%"}} className=" border-l-orange-600" >
           <h3>Sign Up</h3>
-          <div className="mb-3">
+          <div className="mb-3 ">
             <label>Email address</label>
             <input
               type="email"
@@ -163,6 +176,7 @@ export default function Signup() {
         </form>
       </div>
       </div>
+    
     </>
   );
 }

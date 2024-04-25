@@ -4,7 +4,7 @@ import { useState } from "react";
 import { auth } from "../firebaseConfig/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Forget, { handleForgotPassword } from "./forget";
-
+import './login.css'
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");

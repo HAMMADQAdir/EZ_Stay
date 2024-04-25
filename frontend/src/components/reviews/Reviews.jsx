@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './ReviewPage.css'; // Import CSS file for styling
 import { FaStar } from 'react-icons/fa'; // Import star icon from react-icons library
 import  axios  from 'axios';
 import { auth } from '../firebaseConfig/firebaseConfig';
+import {ToastContainer,toast} from 'react-toastify'
 const initialReviews = [
   { id: 1, author: 'John Doe', comment: 'Great product, highly recommend!', rating: 5 },
   { id: 2, author: 'Jane Smith', comment: 'Excellent service and fast delivery.', rating: 4 },
@@ -24,9 +25,16 @@ const ReviewCard = ({ review }) => {
 };
 
 const ReviewPage = () => {
+
   const [reviews, setReviews] = useState(initialReviews);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rating, setRating] = useState(0);
+
+  useEffect(()=>{
+    fetch("/readingReview").then(response=>response.json()
+    ).then(data=>setReviews(data))
+  },[])
+console.log(reviews);
 
   const handleWriteReview = () => {
     setIsModalOpen(true);
@@ -54,10 +62,16 @@ const ReviewPage = () => {
   
       setReviews([...reviews, newReview]);
       
+     if(author.length <=10){
       await axios.post('/rev',newReview).then(result=>console.log("   s ")).catch(err=>console.log("err"))
       setIsModalOpen(false);
       setRating(0); // Reset rating after submission
-    
+    toast.success("succes")
+     }else{
+      setIsModalOpen(false);
+      alert("Author < 10")
+      toast.error("Author name has to be less then 10 characters");
+     }
   
   };
 

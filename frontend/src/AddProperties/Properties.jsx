@@ -12,9 +12,9 @@ export default function AddProperty() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [imgId, setImgId] = useState(0); 
-const nav = useNavigate();
+const navigate = useNavigate();
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe =  auth.onAuthStateChanged((user) => {
       if (user) {
         setCurrentUser(user);
        setCurrentUser(user.uid)
@@ -25,8 +25,8 @@ const nav = useNavigate();
       } else {
         setCurrentUser(null);
         setLoggedIn(false);
-        
-        nav('/login');
+        console.log("in uidnot defined");
+        navigate('/login');
       }
     });
 
@@ -91,7 +91,7 @@ const nav = useNavigate();
     // imgId++;
   //   fetch("/getItemCount").then(response=>response.json()
   // ).then(data=>setImgId(data)).catch(err=>console.log(err))
-  let v = await fetch('/kl').then(response=>response.json()) ;
+  let v = await fetch('/getItemCount').then(response=>response.json()) ;
   console.log(v.length);
  
 // axios.get('http://localhost:1122/getItemCount')
@@ -101,8 +101,8 @@ const nav = useNavigate();
    setTimeout(()=>{
     setImgId(v);
     formData.userId = currentUser
-    formData.itemId = v.length+1;
-  
+    formData.itemId = v.length+9;
+  console.log("this is desc "+formData.description)
       axios.post("http://localhost:1122/properties", formData)
       .then((result) => console.log("   s "))
       .catch((err) => console.log("err"));
@@ -112,7 +112,8 @@ const nav = useNavigate();
     const file = formData.image;
   
     setTimeout(()=>{
-      const storageRef = ref(storage, `images/${imgId}`);
+      let id = (v.length + 9).toString();
+      const storageRef = ref(storage, `images/${id}`);
 
      uploadBytes(storageRef, file).then((result) =>
       console.log("Image uploaded to Firebase Storage successfully.")
@@ -249,16 +250,7 @@ const nav = useNavigate();
             placeholder="Enter Price"
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="description">Description:</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-            className="form-control"
-            placeholder="Enter Description"
-          />
-        </div>
+       
         <div className="mb-3">
           <label htmlFor="image">Image:</label>
           <input
@@ -289,7 +281,7 @@ const nav = useNavigate();
         }}
       >
         {loading ? <Loader/>:
-          <form onSubmit={register} style={{ width: "40%" }}>
+          <form onSubmit={register} style={{ width: "40%" }} >
             <h3>Add Property</h3>
 
             {/* Category dropdown */}
@@ -356,7 +348,16 @@ const nav = useNavigate();
                 required
               />
             </div>
-
+            <div className="mb-3">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            className="form-control"
+            placeholder="Enter Description"
+          />
+        </div>
 
 
            

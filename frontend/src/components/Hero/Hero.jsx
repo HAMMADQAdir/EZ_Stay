@@ -114,7 +114,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="hero-section" ref={heroRef}>
+    <div className="hero-section" ref={heroRef} style={{marginTop:"66px"}}>
       <img src={images[currentIndex]} alt="Hero" className="hero-image" ref={imageRef} />
       <h1 className="hero-text">{displayedText}</h1>
       <img src={logo} alt="Logo" className="logo" ref={logoRef} />

@@ -69,15 +69,16 @@ server.post("/register", (req, res) => {
 // inserting propeerties details in mysql
 
 server.post("/properties", (req, res) => {
-  const { itemId, Pincode, Locality, Street, state, userId } = req.body;
-  const query = `INSERT INTO item (itemId, Pincode, Locality, Street, state, userId) VALUES (?, ?, ?, ?, ?, ?)`;
+  const { itemId, Pincode, Locality, Street, state, userId,description } = req.body;
+  const query = `INSERT INTO item (itemId, Pincode, Locality, Street, state, userId,description) VALUES (?, ?, ?, ?, ?, ?,?)`;
   
-  db.query(query, [itemId, Pincode, Locality, Street, state, userId], (err, result) => {
+  db.query(query, [itemId, Pincode, Locality, Street, state, userId,description], (err, result) => {
     if (err) {
       console.error("Error inserting data:", err);
       res.status(500).send("Error inserting data into database");
     } else {
       console.log("Data inserted successfully");
+      console.log(description);
       res.status(200).send("Data inserted successfully");
     }
   });
@@ -85,11 +86,11 @@ server.post("/properties", (req, res) => {
 
 
 server.post("/rev", (req, res) => {
-  const { rating, comment, author } = req.body; // Destructure data
+  const { id,rating, comment, author } = req.body; // Destructure data
   console.log("in post");
   db.query(
-    "INSERT INTO reviews(rating, description, author) VALUES(?, ?, ?)",
-    [rating, comment, author],
+    "INSERT INTO reviews(reviewId,rating, description, author) VALUES(?,?, ?, ?)",
+    [id,rating, comment, author],
     (err, result) => {
       if (err) {
         console.error("Error inserting review:", err);
@@ -102,10 +103,22 @@ server.post("/rev", (req, res) => {
 });
 
 
-server.get("/kl",(req,response)=>{
-  db.query('select itemId ,count(itemId) from item group by itemId',(err,result)=>{
+server.get("/getItemCount",(req,response)=>{
+  db.query('select itemId ,count(itemId) from item group by itemId ',(err,result)=>{
     if (err) throw err;
     else
+  
+    response.status(200).json(result);
+  })
+})
+
+// reading review
+server.get("/readingReview",(req,response)=>{
+  console.log("success")
+  db.query('select * from reviews',(err,result)=>{
+    if (err) throw err;
+    else
+  console.log("success")
     response.status(200).json(result);
   })
 })

@@ -9,6 +9,9 @@ import Login from './components/signInAndSignUp/Login';
 import Signup from './components/signInAndSignUp/Signup';
 import Contactus from './components/ContactUs/contactus';
 import Forget from './components/signInAndSignUp/forget';
+// import Property from './components/propertyView/Property';
+import PropertyDetails from './components/propertyView/Property';
+import Profile from './components/profile/profile';
 function App() {
 
 
@@ -20,7 +23,9 @@ function App() {
     ,{path:'/login',element:<Login/>}
     ,{path:'/signup',element:<Signup/>}
     ,{path:'/contactus',element:<Contactus/>}
-    ,{path:'/forget',element:<Forget/>}
+    ,{path:'/forget',element:<Forget/>},
+    {path:'/viewproperty',element:<PropertyDetails/>},
+    {path:"/profile",element:<Profile/>}
 
   ]
   }
