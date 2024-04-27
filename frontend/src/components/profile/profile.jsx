@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import man from "../../assets/360_F_243587666_DXAiHEZwwbQBDWQRmu2KtfP1qofmEmrH.webp";
+import man from "../images/ezstay.jpg";
 
 export default function Profile() {
   const [name, setName] = useState("Md Aabid Hussain");
